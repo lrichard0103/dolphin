@@ -180,7 +180,7 @@ void CodeWidget::ConnectWidgets()
   });
   connect(m_search_callstack, &QLineEdit::textChanged, this, &CodeWidget::UpdateCallstack);
 
-  connect(m_branch_watch, &QPushButton::pressed, this, &CodeWidget::OnBranchWatchDialog);
+  connect(m_branch_watch, &QPushButton::clicked, this, &CodeWidget::OnBranchWatchDialog);
 
   connect(m_symbols_list, &QListWidget::itemPressed, this, &CodeWidget::OnSelectSymbol);
   connect(m_callstack_list, &QListWidget::itemPressed, this, &CodeWidget::OnSelectCallstack);
@@ -190,8 +190,6 @@ void CodeWidget::ConnectWidgets()
           &CodeWidget::OnSelectFunctionCallers);
 
   connect(Host::GetInstance(), &Host::PPCSymbolsChanged, this, &CodeWidget::OnPPCSymbolsChanged);
-  connect(m_code_view, &CodeViewWidget::BreakpointsChanged, this,
-          [this] { emit BreakpointsChanged(); });
   connect(m_code_view, &CodeViewWidget::UpdateCodeWidget, this, &CodeWidget::Update);
 
   connect(m_code_view, &CodeViewWidget::RequestPPCComparison, this,
